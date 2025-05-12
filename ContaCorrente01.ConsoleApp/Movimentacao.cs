@@ -1,5 +1,5 @@
 ﻿
-namespace ContaCorrente01.ConsoleApp
+namespace ContaCorrente1.ConsoleApp
 {
     public class Movimentacao
     {
@@ -12,3 +12,4 @@ namespace ContaCorrente01.ConsoleApp
         }
     }
 }
+    

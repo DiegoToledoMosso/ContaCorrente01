@@ -1,9 +1,7 @@
 ﻿
-using ContaCorrente01.ConsoleApp;
-
-namespace ContaCorrente.ConsoleApp
+namespace ContaCorrente1.ConsoleApp
 {
-
+    
     public class ContaCorrente
     {
         

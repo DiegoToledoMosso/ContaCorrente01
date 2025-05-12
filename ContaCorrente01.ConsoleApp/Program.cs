@@ -1,71 +1,43 @@
-﻿namespace ContaCorrente01.ConsoleApp
+﻿
+
+using ContaCorrente1.ConsoleApp;
+
+namespace ContaCorrente01.ConsoleApp
 {
 
-    namespace ContaCorrente.ConsoleApp
+    internal class Program
     {
-
-        public class ContaCorrente
+        static void Main(string[] args)
         {
-            
-            public int numero;
-            public decimal saldo;
-            public decimal limite;
-            public Movimentacao[] movimentacoes;
-            int contadorMovimentacoes = 0;
+            ContaCorrente conta1 = new ContaCorrente();
+            conta1.numero = 12;
+            conta1.saldo = 1000;
+            conta1.limite = 0;
+            conta1.movimentacoes = new Movimentacao[100];
 
-            
-            public void Sacar(decimal quantia)
-            {
-                if (quantia <= saldo + limite)
-                {
-                    saldo -= quantia;
+            conta1.Sacar(200);
 
-                    Movimentacao novaMovimentacao = new Movimentacao();
-                    novaMovimentacao.valor = quantia;
-                    novaMovimentacao.tipo = "Débito";
+            conta1.Depositar(300);
 
-                    movimentacoes[contadorMovimentacoes] = novaMovimentacao;
-                    contadorMovimentacoes++;
-                }
-            }
+            conta1.Depositar(500);
 
-            public void Depositar(decimal quantia)
-            {
-                saldo += quantia;
+            conta1.Sacar(200);
 
-                Movimentacao novaMovimentacao = new Movimentacao();
-                novaMovimentacao.valor = quantia;
-                novaMovimentacao.tipo = "Crédito";
+            ContaCorrente conta2 = new ContaCorrente();
+            conta2.saldo = 300;
+            conta2.numero = 13;
+            conta2.limite = 0;
+            conta2.movimentacoes = new Movimentacao[100];
 
-                movimentacoes[contadorMovimentacoes] = novaMovimentacao;
-                contadorMovimentacoes++;
-            }
+            conta1.TransferirPara(conta2, 400);
 
-            public void TransferirPara(ContaCorrente destinatario, decimal quantia)
-            {
-                destinatario.Depositar(quantia);
+            conta1.ExibirExtrato();
 
-                this.Sacar(quantia);
-            }
+            Console.WriteLine();
 
-            public void ExibirExtrato()
-            {
-                Console.WriteLine("Extrato da Conta #" + this.numero);
+            conta2.ExibirExtrato();
 
-                Console.WriteLine("Saldo: " + this.saldo);
-
-                Console.WriteLine();
-
-                for (int i = 0; i < movimentacoes.Length; i++)
-                {
-                    Movimentacao movimentacaoAtual = movimentacoes[i];
-
-                    if (movimentacaoAtual != null)
-                    {
-                        Console.WriteLine(movimentacaoAtual.LerMovimentacao());
-                    }
-                }
-            }
+            Console.ReadLine();
         }
     }
 }
